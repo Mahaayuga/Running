@@ -50,20 +50,16 @@ class CSVReader
     @course.reverse_each do |item|
       
       if bool == true 
-        printf '  <div class="cd-projects-wrapper">'+"\n"
-        printf '    <ul class="cd-slider">'+"\n"
-        printf '      <li class="current">'+"\n"
+        printf '  <div class="frame dragscroll">'+"\n"
         bool = false
-      else
-        printf '      <li>'+"\n"
       end
-printf '        <a href="#0">'+"\n"
-printf '          <img src="img/'+ item.date.to_s + '.png" alt="image">'+"\n"
-printf '          <div class="project-info">'+"\n"
-printf "            <h2>%s</h2>\n", item.date.strftime("%-d %b %Y")
-printf "            <p>%s</p><p>%2.1f km</p><p>%s /km</p>\n",item.temps.strftime("%M'%S"), item.dist, item.vitesse.strftime("%-M:%S")
-printf "          </div>\n        </a>\n      </li>\n\n"
-    end  
+        printf '    <div class="silder">'+"\n"
+        printf "      <h2>%s</h2>\n", item.date.strftime("%-d %b %Y")
+        printf '      <img src="img/'+ item.date.to_s + '.png" alt="image">'+"\n"
+        printf "      <p>%s</p><p>%2.1f km</p><p>%s /km</p>\n",item.temps.strftime("%M'%S"), item.dist, item.vitesse.strftime("%-M:%S")
+        printf "    </div>\n"
+    end
+    printf "  </div>\n"
   end  
 
 end
