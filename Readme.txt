@@ -4,3 +4,6 @@
 
 2016-10-23
   slider corrigé grâce à https://github.com/asvd/dragscroll (thanks to him)
+
+2016-10-24
+  mise en place de locals: pour passer des variables dans les templates

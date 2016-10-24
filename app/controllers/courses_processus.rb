@@ -25,8 +25,11 @@ class CSVReader
       sum += value.dist
       tmp += value.temps.min * 60 + value.temps.sec
     end
-    printf "Distance totale %2.1f km\nTemps total %i:%i \n", sum, tmp/3600, (tmp%3600)/60
+    #printf "Distance totale %2.1f km\nTemps total %i:%i \n", sum, tmp/3600, (tmp%3600)/60
+    return sum
   end
+
+  
 
   #Génération du HTML
   def html_date
@@ -34,7 +37,7 @@ class CSVReader
     @course.each do |value|
       dates << value.date.to_s     #(value.date.day.to_s + "/" + value.date.month.to_s)
     end
-    puts dates.inspect
+    return dates.inspect
   end
 
   def html_dist
@@ -42,7 +45,7 @@ class CSVReader
     @course.each do |value|
       dist << (value.dist.to_f)
     end
-    puts dist.inspect
+    return dist.inspect
   end
 
   def html_slider
