@@ -35,9 +35,9 @@ class CSVReader
   def html_date
     dates = []
     @course.each do |value|
-      dates << value.date.to_s     #(value.date.day.to_s + "/" + value.date.month.to_s)
+      dates << value.date.to_s  
     end
-    return dates.inspect
+    return dates
   end
 
   def html_dist

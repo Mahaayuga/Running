@@ -1,2 +1,46 @@
 h1 Graphiques
-em Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, ullam.
+
+em #{mes_x}
+br/
+em #{mes_y}
+
+<canvas id="myChart_dist"></canvas>
+
+javascript:
+  var ctx = document.getElementById("myChart_dist").getContext("2d");
+  var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels : #{mes_x},
+    datasets: [{
+      label: 'Distance',
+      data: #{mes_y},
+        backgroundColor: 'rgba(151,187,205,.4)',
+        borderColor: 'rgba(151,187,205,1)',
+        borderWidth: 2,
+        pointStrokeColor : '#fff',
+      }]
+    },
+    options: {
+      hover: {
+        mode: 'dataset'
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            stepSize: 1,
+            beginAtZero: true
+          }
+        }],
+        xAxes: [{
+          type: 'time',
+          time: {
+            unit: 'day',
+            min: "2016-09-15",
+            max: "2016-10-25"
+          }
+        }]
+      }
+    }
+  });
+

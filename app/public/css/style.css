@@ -44,20 +44,11 @@ html{
   padding:0px 35px;
 }
 
-
-
-/*.scrolls {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    height: 80px;
-    white-space:nowrap;
+canvas {
+  max-width: 100%;
+  margin-left: initial;
+  margin-right: initial;
+  margin: 1em auto;
+  width: 100%; 
+  max-height: 400px;
 }
-.imageDiv img {
-    box-shadow: 1px 1px 10px #999;
-    margin: 2px;
-    max-height: 50px;
-    cursor: pointer;
-    display:inline-block;
-    vertical-align:top;
- }*/
-
