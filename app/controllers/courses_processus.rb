@@ -25,17 +25,23 @@ class CSVReader
       sum += value.dist
       tmp += value.temps.min * 60 + value.temps.sec
     end
-    #printf "Distance totale %2.1f km\nTemps total %i:%i \n", sum, tmp/3600, (tmp%3600)/60
     return sum
   end
 
-  
+  #Pour l'instant, je vais sortir toutes les variables séparément
+  def all_date
+    dates = []
+    @course.reverse_each do |item|
+      dates << item.date.to_s
+    end
+    return dates
+  end
 
   #Génération du HTML
   def html_date
     dates = []
     @course.each do |value|
-      dates << value.date.to_s  
+      dates << value.date.to_s
     end
     return dates
   end

@@ -1,8 +1,10 @@
 h1 Graphiques
 
+p Mon problème : lors du passage en JS
 em #{mes_x}
-br/
-em #{mes_y}
+p est tranformé en 
+em #{mes_x.to_s.gsub('"', '\quot;')}
+
 
 <canvas id="myChart_dist"></canvas>
 
@@ -11,7 +13,7 @@ javascript:
   var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels : #{mes_x},
+    labels : #{mes_x}, 
     datasets: [{
       label: 'Distance',
       data: #{mes_y},

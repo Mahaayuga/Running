@@ -3,15 +3,6 @@ require 'slim'
 require 'csv'
 require_relative 'controllers/courses_processus.rb'
 
-=begin
-before do
-  my_run = CSVReader.new
-  my_run.mise_en_memoire("../db/data.csv")
-  my_run.dist_totale
-  #slim :slider, locals: { nom: my_run.html_dist } #ça, ça marche!
-end
-=end
-
 get '/' do 
   slim :index
 end
@@ -21,7 +12,7 @@ get '/slider' do
   my_run = CSVReader.new
   my_run.mise_en_memoire("../db/data.csv")
 
-  slim :slider, locals: { nom: my_run.dist_totale, test: "test" }
+  slim :slider, locals: { km: my_run.dist_totale, items: my_run.all_date}
 end
 
 get '/graph' do

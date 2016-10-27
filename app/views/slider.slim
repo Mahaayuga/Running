@@ -1,68 +1,41 @@
+/! require 'date'
+
 h1 Historique des courses
-h2 distance totale #{nom} km
-em #{test}
+h2 distance totale #{km} km
+/!em #{items}
 
 div class="frame dragscroll"
-  div.slider
-    h2 17 Oct 2016
-    img src="/img/2016-10-17.png" alt="image"
-    p 20'33
-    p 3.5 km
-    p 5:55 /km
-    
-  div.slider
-    h2 DD Mmm YYYY
-    img src="img/img.png"
-    p HH'MM
-    p X.x km
-    p M:ss /km
 
-  div.slider
-    h2 DD Mmm YYYY
-    img src="img/img.png"
-    p HH'MM
-    p X.x km
-    p M:ss /km
+  - items.each do |item|
 
-  div.slider
-    h2 DD Mmm YYYY
-    img src="img/img.png"
-    p HH'MM
-    p X.x km
-    p M:ss /km
+    div.slider
+      /! h2 #{Date.strptime(item, "%Y-%m-%d")}
+      h2 #{Date.strptime(item, "%Y-%m-%d").strftime("%-d %b %Y")}
+      img src="/img/#{item}.png" alt="image"
+      p MM'ss
+      p X.x km
+      p M:ss /km
 
-  div.slider
-    h2 DD Mmm YYYY
-    img src="img/img.png"
-    p HH'MM
-    p X.x km
-    p M:ss /km
 
-  div.slider
-    h2 DD Mmm YYYY
-    img src="img/img.png"
-    p HH'MM
-    p X.x km
-    p M:ss /km
+/!  div.slider
+/!    h2 17 Oct 2016
+/!    img src="/img/2016-10-17.png" alt="image"
+/!    p 20'33
+/!   p 3.5 km
+/!    p 5:55 /km
+/!    
+/!  div.slider
+/!    h2 DD Mmm YYYY
+/!    img src="img/img.png"
+/!    p HH'MM
+/!    p X.x km
+/!    p M:ss /km
+/!
+/!  div.slider
+/!    h2 DD Mmm YYYY
+/!    img src="img/img.png"
+/!    p HH'MM
+/!    p X.x km
+/!    p M:ss /km
 
-  div.slider
-    h2 DD Mmm YYYY
-    img src="img/img.png"
-    p HH'MM
-    p X.x km
-    p M:ss /km
-
-  div.slider
-    h2 DD Mmm YYYY
-    img src="img/img.png"
-    p HH'MM
-    p X.x km
-    p M:ss /km
-
-  div.slider
-    h2 DD Mmm YYYY
-    img src="img/img.png"
-    p HH'MM
-    p X.x km
-    p M:ss /km
 
