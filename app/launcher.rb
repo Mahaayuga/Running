@@ -12,7 +12,7 @@ get '/slider' do
   my_run = CSVReader.new
   my_run.mise_en_memoire("../db/data.csv")
 
-  slim :slider, locals: { km: my_run.dist_totale, items: my_run.all_date}
+  slim :slider, locals: { it_dates: my_run.all_date, it_temps: my_run.all_temps, it_dist: my_run.all_dist, it_vitesse: my_run.all_vitesse}
 end
 
 get '/graph' do

@@ -28,7 +28,16 @@ class CSVReader
     return sum
   end
 
+  #Code pour le slider
   #Pour l'instant, je vais sortir toutes les variables séparément
+  def all_temps
+    temps = []
+    @course.reverse_each do |item|
+      temps << item.temps
+    end
+    return temps
+  end
+
   def all_date
     dates = []
     @course.reverse_each do |item|
@@ -37,7 +46,24 @@ class CSVReader
     return dates
   end
 
-  #Génération du HTML
+  def all_dist
+    dist = []
+    @course.reverse_each do |item|
+      dist << item.dist
+    end
+    return dist
+  end
+
+  def all_vitesse
+    vitesse = []
+    @course.reverse_each do |item|
+      vitesse << item.vitesse
+    end
+    return vitesse
+  end
+
+
+  #Génération des graphiques
   def html_date
     dates = []
     @course.each do |value|
@@ -53,22 +79,5 @@ class CSVReader
     end
     return dist.inspect
   end
-
-  def html_slider
-    bool = true
-    @course.reverse_each do |item|
-      
-      if bool == true 
-        printf '  <div class="frame dragscroll">'+"\n"
-        bool = false
-      end
-        printf '    <div class="silder">'+"\n"
-        printf "      <h2>%s</h2>\n", item.date.strftime("%-d %b %Y")
-        printf '      <img src="img/'+ item.date.to_s + '.png" alt="image">'+"\n"
-        printf "      <p>%s</p><p>%2.1f km</p><p>%s /km</p>\n",item.temps.strftime("%M'%S"), item.dist, item.vitesse.strftime("%-M:%S")
-        printf "    </div>\n"
-    end
-    printf "  </div>\n"
-  end  
 
 end

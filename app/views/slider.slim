@@ -1,41 +1,16 @@
-/! require 'date'
-
 h1 Historique des courses
-h2 distance totale #{km} km
-/!em #{items}
+h2 Distance totale xx km / durée totale HH:mm
+em Dernier "marathon" H:mm en n étapes 
+
 
 div class="frame dragscroll"
 
-  - items.each do |item|
+  - it_dates.count.times do |i|
 
     div.slider
-      /! h2 #{Date.strptime(item, "%Y-%m-%d")}
-      h2 #{Date.strptime(item, "%Y-%m-%d").strftime("%-d %b %Y")}
-      img src="/img/#{item}.png" alt="image"
-      p MM'ss
-      p X.x km
-      p M:ss /km
-
-
-/!  div.slider
-/!    h2 17 Oct 2016
-/!    img src="/img/2016-10-17.png" alt="image"
-/!    p 20'33
-/!   p 3.5 km
-/!    p 5:55 /km
-/!    
-/!  div.slider
-/!    h2 DD Mmm YYYY
-/!    img src="img/img.png"
-/!    p HH'MM
-/!    p X.x km
-/!    p M:ss /km
-/!
-/!  div.slider
-/!    h2 DD Mmm YYYY
-/!    img src="img/img.png"
-/!    p HH'MM
-/!    p X.x km
-/!    p M:ss /km
-
+      h2 #{Date.strptime(it_dates[i], "%Y-%m-%d").strftime("%-d %b %Y")}
+      img src="/img/#{it_dates[i]}.png" alt="image"
+      p #{it_temps[i].strftime("%M'%S")}
+      p #{it_dist[i]} km
+      p #{it_vitesse[i].strftime("%-M:%S")} /km
 
