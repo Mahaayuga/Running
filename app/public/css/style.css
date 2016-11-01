@@ -3,6 +3,50 @@ html{
   font-family : "Source Sans Pro";
 }
 
+/**************/
+/*  /index   
+/**************/
+
+.index { 
+  text-align: center;
+  margin-top: 4em;
+  margin-bottom: 1em;
+}
+
+
+a {
+  text-decoration: none;
+}
+
+.btn {
+  position: absolute;
+  left: 40%;
+  display: inline-block;
+  margin: 0;
+  padding: 1.4em 2em;
+  border-radius: 50em;
+  background-color: #E8CC06;
+  box-shadow: 0 1px 20px rgba(238, 187, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  -webkit-transition: box-shadow 0.2s;
+  -moz-transition: box-shadow 0.2s;
+  transition: box-shadow 0.2s;
+}
+
+.cd-btn:hover {
+  box-shadow: 0 1px 30px rgba(238, 187, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+
+
+/**************/
+/*  /slider   
+/**************/
+
 .frame {
   overflow-x: hidden;
   overflow-y: hidden;
@@ -15,8 +59,6 @@ html{
 }
 
 .slider{
-/*  border: 1px solid #E6E6E6;
-  border-radius: 5px; */
   cursor: -webkit-grab;
   display:inline-block;
   vertical-align:top;
@@ -26,8 +68,7 @@ html{
 .slider img{
   display: inline-block;
   margin: .15em;
-  height:35em; /*300px*/
-/*  width: 10em; /*200px*/
+  height:35em;
   border: solid 1px #c0c6c3;
   border-radius: 5px ;
 }
