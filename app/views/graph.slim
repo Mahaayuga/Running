@@ -2,9 +2,13 @@ h1 Graphiques
 
 p Mon problème : lors du passage en JS
 em #{mes_x}
-p est tranformé en 
-em #{mes_x.to_s.gsub('"', '\quot;')}
+p est tranformé en
+em #{mes_x.to_s.gsub( '"', "&quot;") }
+/ em #{mes_x.to_s.gsub( '"', 34.chr) }
 
+/ var arry = "#{mes_x.to_s}";
+/ var myArray = string(arry.replace('"', "\""));
+/    labels : [#{mes_x.map { |i| 34.chr(Encoding::UTF_8) + i.to_s + 34.chr(Encoding::UTF_8) }.join(",") }]
 
 <canvas id="myChart_dist"></canvas>
 
@@ -13,7 +17,8 @@ javascript:
   var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels : #{mes_x}, 
+    labels : labels : [#{mes_x.map { |i| 34.chr(Encoding::UTF_8) + i.to_s + 34.chr(Encoding::UTF_8) }.join(",") }]
+    , 
     datasets: [{
       label: 'Distance',
       data: #{mes_y},
@@ -38,11 +43,12 @@ javascript:
           type: 'time',
           time: {
             unit: 'day',
-            min: "2016-09-15",
-            max: "2016-10-25"
+            min: "#{mes_x.first}", 
+            max: "#{mes_x.last}",
           }
         }]
       }
     }
   });
 
+/ , 
