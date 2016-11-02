@@ -1,28 +1,24 @@
 h1 Graphiques
 
-p Mon problème : lors du passage en JS
-em #{mes_x}
-p est tranformé en
-em #{mes_x.to_s.gsub( '"', "&quot;") }
-/ em #{mes_x.to_s.gsub( '"', 34.chr) }
+canvas#myChart_dist
 
-/ var arry = "#{mes_x.to_s}";
-/ var myArray = string(arry.replace('"', "\""));
-/    labels : [#{mes_x.map { |i| 34.chr(Encoding::UTF_8) + i.to_s + 34.chr(Encoding::UTF_8) }.join(",") }]
-
-<canvas id="myChart_dist"></canvas>
+/ reste un calcul de date_max entre les données et la date du jour
 
 javascript:
+  var myRubyArray = "#{mes_x}";
+  var tmpValue = myRubyArray.toString().replace(/&quot;/g, '');
+  var tmpValue = tmpValue.replace(/[\[\]' /"/ \s]+/g, '');
+  var myJSArray = tmpValue.split(",", #{mes_x.count});
+
   var ctx = document.getElementById("myChart_dist").getContext("2d");
   var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels : labels : [#{mes_x.map { |i| 34.chr(Encoding::UTF_8) + i.to_s + 34.chr(Encoding::UTF_8) }.join(",") }]
-    , 
+    labels: myJSArray, 
     datasets: [{
       label: 'Distance',
       data: #{mes_y},
-        backgroundColor: 'rgba(151,187,205,.4)',
+        backgroundColor: 'rgba(151,187,205,.8)',
         borderColor: 'rgba(151,187,205,1)',
         borderWidth: 2,
         pointStrokeColor : '#fff',
@@ -51,4 +47,3 @@ javascript:
     }
   });
 
-/ , 
