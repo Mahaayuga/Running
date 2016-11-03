@@ -1,11 +1,11 @@
 h1 Historique des courses
-h2 Distance totale xx km / durée totale HH:mm
-em Dernier "marathon" H:mm en n étapes 
+h2 En synthèse, #{'%.1f' % it_dist.inject(0, :+)} km, #{ it_temps.inject(0) { |result, value| result + value.min * 60 + value.sec } } secondes
+/em Dernier "marathon" H:mm en n étapes 
 
-
+h3 Les 15 dernières dates
 div class="frame dragscroll"
 
-  - it_dates.count.times do |i|
+  - 15.times do |i|
 
     div.slider
       h2 #{Date.strptime(it_dates[i], "%Y-%m-%d").strftime("%-d %b %Y")}
