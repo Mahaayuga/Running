@@ -1,7 +1,38 @@
 html{
-  background-color:rgb(161,147,193);
+  background-color:#a193c1;
   font-family : "Source Sans Pro";
 }
+
+/**************/
+/*  nav   
+/**************/
+nav{
+  background-color: #725da2; /* #660033;*/
+}
+
+nav ul{
+  display: table;
+  font-size: 1.1em;
+  margin: 15px auto;
+  list-style-type: none;
+  border-radius: 10px;
+  padding:2px;
+}
+
+nav ul li{display: table-cell;}
+
+nav ul li a{
+  display:block;	
+  text-decoration: none;	
+  color: #a193c1;
+  text-align: center;
+  padding: 2px 20px;
+  margin: 0px 30px;
+}
+	
+nav a:hover, nav a:focus{color: #f1eff6;}
+/*.actif{color: white;}*/
+
 
 /**************/
 /*  /index   
