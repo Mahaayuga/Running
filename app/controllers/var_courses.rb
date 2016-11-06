@@ -6,9 +6,9 @@ class Courses
 
   def initialize (date, temps, dist, vitesse)
     @date = Date.strptime(date, "%Y%m%d")
-    @temps = Time.strptime(temps, "%H:%M:%S") #
+    @temps = Time.strptime(temps, "%H:%M:%S")
     @dist = dist.to_f
-    @vitesse = Time.strptime(vitesse, "%M:%S") #.strftime "%M:%S /km"
+    @vitesse = Time.strptime(vitesse, "%M:%S")
   end
   def to_s
     @temps = @temps.strftime "%M:%S"

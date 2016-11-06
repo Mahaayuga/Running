@@ -2,8 +2,6 @@ h1 Graphiques
 
 canvas#myChart_dist
 
-/ reste un calcul de date_max entre les données et la date du jour
-
 javascript:
   var myRubyArray = "#{mes_x}";
   var tmpValue = myRubyArray.toString().replace(/&quot;/g, '');
@@ -19,7 +17,7 @@ javascript:
       label: 'Distance',
       data: #{mes_y},
         backgroundColor: 'rgba(151,187,205,.8)',
-        borderColor: 'rgba(151,187,205,1)',
+        borderColor: 'rgb(117,164,188)',
         borderWidth: 2,
         pointStrokeColor : '#fff',
       }]
@@ -39,8 +37,9 @@ javascript:
           type: 'time',
           time: {
             unit: 'day',
-            min: "#{mes_x.first}", 
-            max: "#{mes_x.last}",
+            unitStepSize: 2,
+            min: "#{mes_x.last}",
+            max: "#{mes_x.first}",
           }
         }]
       }

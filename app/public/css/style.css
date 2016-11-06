@@ -6,9 +6,7 @@ html{
 /**************/
 /*  nav   
 /**************/
-nav{
-  background-color: #725da2; /* #660033;*/
-}
+nav{background-color: #725da2; /* #660033;*/}
 
 nav ul{
   display: table;
@@ -44,10 +42,7 @@ nav a:hover, nav a:focus{color: #f1eff6;}
   margin-bottom: 1em;
 }
 
-
-a {
-  text-decoration: none;
-}
+a {text-decoration: none;}
 
 .btn {
   position: absolute;
@@ -73,7 +68,6 @@ a {
 }
 
 
-
 /**************/
 /*  /slider   
 /**************/
@@ -85,8 +79,7 @@ a {
   width:100%;
   white-space:nowrap;
   display:inline-block;
-  margin-top: 20px;
-  padding: 0 0 30px 0;    
+  padding: 0 0 20px 0;    
 }
 
 .slider{
@@ -116,11 +109,14 @@ a {
   padding:0px 35px;
 }
 
+/**************/
+/*  /graphiques   
+/**************/
+
 canvas {
-  max-width: 100%;
+  max-width: 97%;
   margin-left: initial;
   margin-right: initial;
   margin: 1em auto;
-  width: 100%; 
-  max-height: 400px;
+  max-height: 420px;
 }

@@ -14,20 +14,6 @@ class CSVReader
     end	
   end
 
-  def lecture
-    puts @course
-  end
-
-  def dist_totale #OK
-    sum = 0.0
-    tmp = 0
-    @course.each do |value|
-      sum += value.dist
-      tmp += value.temps.min * 60 + value.temps.sec
-    end
-    return sum
-  end
-
   #Code pour le slider
   #Pour l'instant, je vais sortir toutes les variables séparément
   def all_temps
@@ -62,22 +48,39 @@ class CSVReader
     return vitesse
   end
 
-
-  #Génération des graphiques
-  def html_date
-    dates = []
-    @course.each do |value|
-      dates << (value.date.to_s)
+  def all_data
+    mydata = { run:0, duree: 0, str_duree: "" , dist: 0 }
+    @course.each do |item|
+      mydata[:run]  += 1
+      mydata[:duree] += item.temps.min * 60 +item.temps.sec
+      mydata[:dist]  += item.dist
     end
-    return dates
+
+    #Conversion sec => heures
+    mm, ss = mydata[:duree].divmod(60)
+    hh, mm = mm.divmod(60)
+    mydata[:str_duree] = "#{hh} heures #{mm} minutes"
+    
+    return mydata
   end
 
-  def html_dist
-    dist = []
-    @course.each do |value|
-      dist << (value.dist.to_f)
+  def marathon
+    mydata = { run:0, duree: 0, str_duree: "", dist: 0 }
+
+    @course.reverse_each do |item|
+      mydata[:run]  += 1
+      mydata[:duree] += item.temps.min * 60 +item.temps.sec
+      mydata[:dist]  += item.dist
+      break if mydata[:dist] >= 42.195
     end
-    return dist.inspect
+    
+    #Conversion sec => heures
+    mm, ss = mydata[:duree].divmod(60)
+    hh, mm = mm.divmod(60)
+    mydata[:str_duree] = "#{hh}:#{mm}'"
+
+    return mydata
   end
+
 
 end
