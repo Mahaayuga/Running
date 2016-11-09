@@ -16,71 +16,54 @@ class CSVReader
 
   #Code pour le slider
   #Pour l'instant, je vais sortir toutes les variables séparément
-  def all_temps
-    temps = []
+  def all_inclusive(type)
+    mydata = []
     @course.reverse_each do |item|
-      temps << item.temps
+      mydata << item.date.to_s if type == "date"
+      mydata << item.temps     if type == "temps"
+      mydata << item.dist      if type == "dist"
+      mydata << item.vitesse   if type == "vitesse"
     end
-    return temps
-  end
+    return mydata 
+  end  
 
-  def all_date
-    dates = []
+  def all_case(type)  #même principe que all_inclusive mais avec le case
+    mydata = []
     @course.reverse_each do |item|
-      dates << item.date.to_s
+      
+      case type
+        when "date"    then mydata << item.date.to_s
+        when "temps"   then mydata << item.temps
+        when "dist"    then mydata << item.dist
+        when "vitesse" then mydata << item.vitesse
+      end
     end
-    return dates
-  end
-
-  def all_dist
-    dist = []
-    @course.reverse_each do |item|
-      dist << item.dist
-    end
-    return dist
-  end
-
-  def all_vitesse
-    vitesse = []
-    @course.reverse_each do |item|
-      vitesse << item.vitesse
-    end
-    return vitesse
-  end
-
-  def all_data
-    mydata = { run:0, duree: 0, str_duree: "" , dist: 0 }
-    @course.each do |item|
-      mydata[:run]  += 1
-      mydata[:duree] += item.temps.min * 60 +item.temps.sec
-      mydata[:dist]  += item.dist
-    end
-
-    #Conversion sec => heures
-    mm, ss = mydata[:duree].divmod(60)
-    hh, mm = mm.divmod(60)
-    mydata[:str_duree] = "#{hh} heures #{mm} minutes"
-    
     return mydata
   end
 
-  def marathon
-    mydata = { run:0, duree: 0, str_duree: "", dist: 0 }
-
+  def all_data (marathon)
+    mydata = { run: 0, duree: 0, str_duree: "" , dist: 0 }
+    
     @course.reverse_each do |item|
       mydata[:run]  += 1
       mydata[:duree] += item.temps.min * 60 +item.temps.sec
       mydata[:dist]  += item.dist
-      break if mydata[:dist] >= 42.195
-    end
-    
-    #Conversion sec => heures
-    mm, ss = mydata[:duree].divmod(60)
-    hh, mm = mm.divmod(60)
-    mydata[:str_duree] = "#{hh}:#{mm}'"
+#      break if marathon == FALSE && mydata[:dist] >= 42.195
+      break if mydata[:dist] >= 42.195 unless marathon
+   end
 
+    tmp = sec_to_hour(mydata[:duree])
+    mydata[:str_duree] = "#{tmp[:hh]} heures #{tmp[:mm]}"
+    
     return mydata
   end
 
-
+  def sec_to_hour (secondes)
+    #Conversion sec => heures
+    myhour = { hh: 0, mm: 0, ss:0 }
+    myhour[:mm], myhour[:ss] = secondes.divmod(60)
+    myhour[:hh], myhour[:mm] = myhour[:mm].divmod(60)
+    
+    return myhour
+  end
 end

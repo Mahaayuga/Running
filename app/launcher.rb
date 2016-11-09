@@ -12,12 +12,12 @@ get '/slider' do
   my_run = CSVReader.new
   my_run.mise_en_memoire("../db/data.csv")
 
-  slim :slider, locals: { it_dates: my_run.all_date,  
-                          it_temps: my_run.all_temps, 
-                          it_dist: my_run.all_dist,  
-                          it_vitesse: my_run.all_vitesse,  
-                          it_data: my_run.all_data,  
-                          it_marathon: my_run.marathon }
+  slim :slider, locals: { it_dates: my_run.all_inclusive("date"),  
+                          it_temps: my_run.all_inclusive("temps"), 
+                          it_dist: my_run.all_inclusive("dist"),  
+                          it_vitesse: my_run.all_inclusive("vitesse"),  
+                          it_data: my_run.all_data(TRUE),  
+                          it_marathon: my_run.all_data(FALSE) }
 end
 
 get '/graph' do
@@ -25,7 +25,9 @@ get '/graph' do
   my_run = CSVReader.new
   my_run.mise_en_memoire("../db/data.csv")
   
-  slim :graph, locals: { mes_x: my_run.all_date, mes_y: my_run.all_dist, mes_y2: my_run.all_temps }
+  slim :graph, locals: { mes_x: my_run.all_inclusive("date"),
+                         mes_y: my_run.all_inclusive("dist"), 
+                         mes_y2: my_run.all_inclusive("temps") }
 end
 
 get "/*" do
