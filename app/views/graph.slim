@@ -16,24 +16,83 @@ javascript:
     datasets: [{
       label: 'Distance',
       data: #{mes_y},
-        backgroundColor: 'rgba(151,187,205,.8)',
+        backgroundColor: 'rgba(151,187,205, .8)',
         borderColor: 'rgb(117,164,188)',
         borderWidth: 2,
         pointStrokeColor : '#fff',
       }]
     },
     options: {
+      legend: {
+        display: false
+      },
       hover: {
-        mode: 'dataset'
+        mode: 'single'
       },
       scales: {
         yAxes: [{
           ticks: {
             stepSize: 1,
             beginAtZero: true
+          },
+          scaleLabel: {
+            display: true,
+            labelString: "km parcourus",
+            fontSize: 16
+          },
+        }],
+        xAxes: [{
+          barPercentage: .7,
+          type: 'time',
+          time: {
+            unit: 'day',
+            unitStepSize: 2,
+            min: "#{mes_x.last}",
+            max: "#{mes_x.first}",
+          }
+        }]
+      }
+    }
+  });
+
+
+canvas#myChart_rythm
+
+javascript:
+  var myRubyArray = "#{mes_x}";
+  var tmpValue = myRubyArray.toString().replace(/&quot;/g, '');
+  var tmpValue = tmpValue.replace(/[\[\]' /"/ \s]+/g, '');
+  var myJSArray = tmpValue.split(",", #{mes_x.count});
+
+  var ctx = document.getElementById("myChart_rythm").getContext("2d");
+  var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: myJSArray, 
+    datasets: [{
+      label: 'Rythme',
+      data: #{mes_y2},
+        borderWidth: 2,
+        pointStrokeColor : '#fff',
+      }]
+    },
+    options: {
+      showLines: false,
+      legend: {
+        display: false
+      },
+      hover: {
+        mode: 'single'
+      },
+      scales: {
+        yAxes: [{
+          display: false,
+          ticks: {
+            reverse: true
           }
         }],
         xAxes: [{
+          barPercentage: .7,
           type: 'time',
           time: {
             unit: 'day',
