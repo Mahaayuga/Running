@@ -114,9 +114,9 @@ a {text-decoration: none;}
 /**************/
 
 canvas {
-  max-width: 97%;
+  max-width: 98%;
   margin-left: initial;
   margin-right: initial;
-  margin: 1em auto;
-  max-height: 420px;
+  margin: .6em auto;
+  max-height: 380px;
 }
