@@ -14,7 +14,7 @@ get '/slider' do
 
   slim :slider, locals: { it_dates: my_run.all_inclusive("date"),  
                           it_temps: my_run.all_inclusive("temps"), 
-                          it_dist: my_run.all_inclusive("dist"),  
+                          it_dist: my_run.all_inclusive("dist"),
                           it_vitesse: my_run.all_inclusive("vitesse"),  
                           it_data: my_run.all_data(TRUE),  
                           it_marathon: my_run.all_data(FALSE) }
@@ -26,8 +26,11 @@ get '/graph' do
   my_run.mise_en_memoire("../db/data.csv")
   
   slim :graph, locals: { mes_x: my_run.all_inclusive("date"),
-                         mes_y: my_run.all_inclusive("dist"), 
-                         mes_y2: my_run.all_inclusive("temps") }
+                         mes_y: my_run.all_inclusive("dist"),
+                         mes_y2: my_run.all_inclusive("v.to_f") }
+
+#                        mes_y_cumul: my_run.all_inclusive("dist").reverse.cumulative_sum, 
+
 end
 
 get "/*" do

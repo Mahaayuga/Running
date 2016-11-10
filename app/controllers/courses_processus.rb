@@ -23,6 +23,7 @@ class CSVReader
       mydata << item.temps     if type == "temps"
       mydata << item.dist      if type == "dist"
       mydata << item.vitesse   if type == "vitesse"
+      mydata << item.vitesse.min / 60.00 + item.vitesse.sec / 3600.00 if type == "v.to_f"
     end
     return mydata 
   end  
@@ -35,8 +36,10 @@ class CSVReader
         when "date"    then mydata << item.date.to_s
         when "temps"   then mydata << item.temps
         when "dist"    then mydata << item.dist
-        when "vitesse" then mydata << item.vitesse
+        when "vitesse" then mydata << item.vitesse.strftime("%-M:%S")
+        when "v.to_f"  then mydata << item.vitesse.min / 60.000 + item.vitesse.sec / 3600.000
       end
+
     end
     return mydata
   end
@@ -65,5 +68,12 @@ class CSVReader
     myhour[:hh], myhour[:mm] = myhour[:mm].divmod(60)
     
     return myhour
+  end
+end
+
+class Array
+  def cumulative_sum
+    sum = 0
+    self.map{|x| sum += x}
   end
 end
