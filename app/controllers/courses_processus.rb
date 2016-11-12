@@ -51,7 +51,6 @@ class CSVReader
       mydata[:run]  += 1
       mydata[:duree] += item.temps.min * 60 +item.temps.sec
       mydata[:dist]  += item.dist
-#      break if marathon == FALSE && mydata[:dist] >= 42.195
       break if mydata[:dist] >= 42.195 unless marathon
    end
 
