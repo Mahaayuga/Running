@@ -48,7 +48,7 @@ javascript:
             unit: 'day',
             unitStepSize: 2,
             min: "#{mes_x.last}",
-            max: "#{mes_x.first}",
+            max: "#{Date.strptime(mes_x.first, "%Y-%m-%d")+1}",
           }
         }]
       }
@@ -98,7 +98,7 @@ javascript:
             unit: 'day',
             unitStepSize: 2,
             min: "#{mes_x.last}",
-            max: "#{mes_x.first}",
+            max: "#{Date.strptime(mes_x.first, "%Y-%m-%d")+1}",
           }
         }]
       }
