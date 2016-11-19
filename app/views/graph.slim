@@ -1,6 +1,6 @@
-h1 Graphiques
-
-canvas#myChart_dist
+div.container
+  h1 Graphiques
+  canvas#myChart_dist
 
 javascript:
   var myRubyArray = "#{mes_x}";
@@ -32,31 +32,35 @@ javascript:
       scales: {
         yAxes: [{
           ticks: {
-            stepSize: 1,
+            stepSize: 2,
             beginAtZero: true
           },
           scaleLabel: {
             display: true,
             labelString: "km parcourus",
             fontSize: 16
-          },
+          }
         }],
         xAxes: [{
-          barPercentage: .7,
+          barPercentage: .4,
           type: 'time',
           time: {
             unit: 'day',
-            unitStepSize: 2,
+            unitStepSize: 3,
             min: "#{mes_x.last}",
             max: "#{Date.strptime(mes_x.first, "%Y-%m-%d")+1}",
+          },
+          gridLines: {
+            display: false,
+            drawOnChartArea : false
           }
         }]
       }
     }
   });
 
-
-canvas#myChart_rythm
+div.container
+  canvas#myChart_rythm
 
 javascript:
   var myRubyArray = "#{mes_x}";
@@ -92,11 +96,11 @@ javascript:
           }
         }],
         xAxes: [{
-          barPercentage: .7,
+          barPercentage: .4,
           type: 'time',
           time: {
             unit: 'day',
-            unitStepSize: 2,
+            unitStepSize: 3,
             min: "#{mes_x.last}",
             max: "#{Date.strptime(mes_x.first, "%Y-%m-%d")+1}",
           }
