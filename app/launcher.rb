@@ -28,9 +28,15 @@ get '/graph' do
   slim :graph, locals: { mes_x: my_run.all_inclusive("date"),
                          mes_y: my_run.all_inclusive("dist"),
                          mes_y2: my_run.all_inclusive("v.to_f") }
+end
 
-#                        mes_y_cumul: my_run.all_inclusive("dist").reverse.cumulative_sum, 
+get '/courbes' do
+  #init variable
+  my_run = CSVReader.new
+  my_run.mise_en_memoire("../db/data.csv")
 
+  slim :lines, locals: { mes_x: my_run.all_inclusive("date").reverse,
+                         mes_y: my_run.all_inclusive("dist").reverse.cumulative_sum  }
 end
 
 get "/*" do

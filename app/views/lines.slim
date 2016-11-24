@@ -1,0 +1,58 @@
+div.container
+  h1 Distance cumulée
+  canvas#myChart_dist
+
+javascript:
+  var myRubyArray = "#{mes_x}";
+  var tmpValue = myRubyArray.toString().replace(/&quot;/g, '');
+  var tmpValue = tmpValue.replace(/[\[\]' /"/ \s]+/g, '');
+  var myJSArray = tmpValue.split(",", #{mes_x.count});
+
+  var ctx = document.getElementById("myChart_dist").getContext("2d");
+  var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: myJSArray, 
+    datasets: [{
+      label: 'Distance',
+      data: #{mes_y},
+        backgroundColor: 'rgba(151,187,205, .8)',
+        borderColor: 'rgb(117,164,188)',
+        borderWidth: 2,
+        pointStrokeColor : '#fff',
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      hover: {
+        mode: 'single'
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          },
+          scaleLabel: {
+            display: true,
+            labelString: "km parcourus",
+            fontSize: 16
+          }
+        }],
+        xAxes: [{
+          type: 'time',
+          time: {
+            unit: 'day',
+            unitStepSize: 7,
+            min: "#{mes_x.first}",
+            max: "#{Date.strptime(mes_x.last, "%Y-%m-%d")+1}",
+          },
+          gridLines: {
+            display: false,
+            drawOnChartArea : false
+          }
+        }]
+      }
+    }
+  });
