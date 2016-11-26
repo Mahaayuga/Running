@@ -24,17 +24,19 @@ class CSVReader
       mydata << item.dist      if type == "dist"
       mydata << item.vitesse   if type == "vitesse"
       mydata << item.vitesse.min / 60.00 + item.vitesse.sec / 3600.00 if type == "v.to_f"
+      mydata << item.temps.min / 60.000 + item.temps.sec / 3600.000   if type == "t.to_f"
     end
     return mydata 
   end  
 
-  def all_case(type)  #même principe que all_inclusive mais avec le case
+  def all_case(type)  #même principe que all_inclusive mais avec le case #frime
     mydata = []
     @course.reverse_each do |item|
       
       case type
         when "date"    then mydata << item.date.to_s
         when "temps"   then mydata << item.temps
+        when "t.to_f"  then mydata << item.temps.min / 60.000 + item.temps.sec / 3600.000
         when "dist"    then mydata << item.dist
         when "vitesse" then mydata << item.vitesse.strftime("%-M:%S")
         when "v.to_f"  then mydata << item.vitesse.min / 60.000 + item.vitesse.sec / 3600.000
@@ -49,7 +51,7 @@ class CSVReader
     
     @course.reverse_each do |item|
       mydata[:run]  += 1
-      mydata[:duree] += item.temps.min * 60 +item.temps.sec
+      mydata[:duree] += item.temps.min * 60 + item.temps.sec
       mydata[:dist]  += item.dist
       break if mydata[:dist] >= 42.195 unless marathon
    end
