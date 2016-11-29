@@ -70,6 +70,22 @@ class CSVReader
     
     return myhour
   end
+
+  def data_hebdo (ww)
+    mydata = { sum: 0, nb: 0 }
+    
+    ww, aa = ww.to_s.split(".")
+    
+    @course.each do |item|
+      if ww.to_i == item.date.strftime("%W").to_i && item.date.year == aa.to_i then
+        mydata[:sum] += item.dist
+        mydata[:nb]  += 1
+      end
+    end
+    
+    return mydata[:nb] != 0 ? mydata[:sum].round(1) : Float::NAN 
+    
+  end
 end
 
 class Array
