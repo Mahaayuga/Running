@@ -67,7 +67,7 @@ javascript:
   var tmpValue = myRubyArray.toString().replace(/&quot;/g, '');
   var tmpValue = tmpValue.replace(/[\[\]' /"/ \s]+/g, '');
   var myJSArray = tmpValue.split(",", #{mes_x.count});
-
+  
   var ctx = document.getElementById("myChart_rythm").getContext("2d");
   var myChart = new Chart(ctx, {
   type: 'bar',
@@ -105,6 +105,16 @@ javascript:
             max: "#{Date.strptime(mes_x.first, "%Y-%m-%d")+1}",
           }
         }]
+      },
+      tooltips: {
+        callbacks: { 
+          label: function(tooltipItem, data) {
+            var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || 'Other';
+            var min = Math.floor((Number(tooltipItem.yLabel) * 60) % 60);
+            var sec = Math.floor((Number(tooltipItem.yLabel) * 3600) % 3600) - min * 60 ;
+            return datasetLabel + ': ' + min + ":" + (sec < 10 ? "0" : "") + sec;
+          }
+        }
       }
     }
   });
