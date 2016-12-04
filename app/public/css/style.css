@@ -3,8 +3,14 @@ html{
   font-family : "Source Sans Pro";
 }
 
-.container{
+.container {
   width: 85%;
+  margin: 20px auto;
+}
+
+.container_small {
+  width: 60%;
+  height: 400px;
   margin: 20px auto;
 }
 
@@ -13,6 +19,12 @@ html{
     width: 800px;
     margin: 20px 75px;
   } 
+  
+  .container_small {
+    width: 60%;
+    height: 400px;
+    margin: 20px auto;
+  }
 }
 
 
@@ -38,7 +50,7 @@ nav ul li a{
   color: #a193c1;
   text-align: center;
   padding: 2px 20px;
-  margin: 0px 30px;
+  margin: 0px 15px;
 }
 	
 nav a:hover, nav a:focus{color: #f1eff6;}
@@ -51,7 +63,7 @@ nav a:hover, nav a:focus{color: #f1eff6;}
 
 .index { 
   text-align: center;
-  margin-top: 4em;
+  margin-top: 3em;
   margin-bottom: 1em;
 }
 

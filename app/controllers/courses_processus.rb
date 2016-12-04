@@ -14,8 +14,7 @@ class CSVReader
     end	
   end
 
-  #Code pour le slider
-  #Pour l'instant, je vais sortir toutes les variables séparément
+  # SLIDER
   def all_inclusive(type)
     mydata = []
     @course.reverse_each do |item|
@@ -71,19 +70,24 @@ class CSVReader
     return myhour
   end
 
-  def data_hebdo (ww)
+  # WORK IN PROGRESS MOYENNE HEBDO
+  def data_hebdo (ww, type)
     mydata = { sum: 0, nb: 0 }
     
     ww, aa = ww.to_s.split(".")
     
     @course.each do |item|
       if ww.to_i == item.date.strftime("%W").to_i && item.date.year == aa.to_i then
-        mydata[:sum] += item.dist
-        mydata[:nb]  += 1
+
+        case type
+          when "dist"   then mydata[:sum] += item.dist
+          when "t.to_f" then mydata[:sum] += item.temps.min / 60.000 + item.temps.sec / 3600.000
+        end
+        mydata[:nb] += 1
       end
     end
     
-    return mydata[:nb] != 0 ? mydata[:sum].round(1) : Float::NAN 
+    return mydata[:nb] != 0 ? mydata[:sum].round(3) : Float::NAN 
     
   end
 end
