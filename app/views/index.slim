@@ -1,3 +1,7 @@
-    h1.index Running Portfolio
-    /! a.btn href="/slider" Show runs
+h1.index Running Portfolio
+
+big Depuis le #{Date.strptime(it_dates.last, "%Y-%m-%d").strftime("%-d %b %Y")} : #{it_data[:run]} courses, #{'%2.1f' % it_data[:dist]} km et #{it_data[:str_duree]} de temps de parcours
+br/
+em Dernier "marathon" : #{it_marathon[:str_duree]} en #{it_marathon[:run]} étapes
+
 
