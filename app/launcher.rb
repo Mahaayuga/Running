@@ -54,7 +54,7 @@ get '/hebdo' do
   y_hebdo = []
   y2_hebdo = []
 
-  37.upto(50) do |ww|
+  37.upto(51) do |ww|
     x_hebdo << ww	
     y_hebdo << my_run.data_hebdo("#{ww}.2016", "dist")
     y2_hebdo << my_run.data_hebdo("#{ww}.2016", "t.to_f")
