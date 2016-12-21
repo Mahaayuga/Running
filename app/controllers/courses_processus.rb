@@ -45,19 +45,24 @@ class CSVReader
     return mydata
   end
 
-  def all_data (marathon)
+  def all_data (condition)
     mydata = { run: 0, duree: 0, str_duree: "" , dist: 0 }
     
     @course.reverse_each do |item|
       mydata[:run]  += 1
       mydata[:duree] += item.temps.min * 60 + item.temps.sec
       mydata[:dist]  += item.dist
-      break if mydata[:dist] >= 42.195 unless marathon
-   end
+
+      if condition.is_a?(Date) then
+        break if item.date <= condition
+      else
+        break if mydata[:dist] >= 42.195 && condition == "marathon"
+      end
+    end
 
     tmp = sec_to_hour(mydata[:duree])
     mydata[:str_duree] = "#{tmp[:hh]} heures #{tmp[:mm]}"
-    
+
     return mydata
   end
 
@@ -73,9 +78,9 @@ class CSVReader
   # WORK IN PROGRESS MOYENNE HEBDO
   def data_hebdo (ww, type)
     mydata = { sum: 0, nb: 0 }
-    
+
     ww, aa = ww.to_s.split(".")
-    
+
     @course.each do |item|
       if ww.to_i == item.date.strftime("%W").to_i && item.date.year == aa.to_i then
 
@@ -86,9 +91,9 @@ class CSVReader
         mydata[:nb] += 1
       end
     end
-    
+
     return mydata[:nb] != 0 ? mydata[:sum].round(3) : Float::NAN 
-    
+
   end
 end
 

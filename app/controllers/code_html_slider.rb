@@ -27,5 +27,6 @@ print my_y
 print "\n"
 =end
 
-print run(@course)
-print "\n"
+asics = Date.parse('2016-12-10')
+#puts asics.is_a?(Date)
+puts run.all_data(asics)

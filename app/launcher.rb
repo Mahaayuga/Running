@@ -8,9 +8,13 @@ get '/' do
   my_run = CSVReader.new
   my_run.mise_en_memoire("../db/data.csv")
 
+  #nouvelles chaussures 
+  asics = Date.parse('2016-12-10')
+
   slim :index, locals: { it_dates: my_run.all_inclusive("date"),
-                         it_data: my_run.all_data(TRUE),  
-                         it_marathon: my_run.all_data(FALSE) }
+                         it_data: my_run.all_data(TRUE),
+                         it_shoes: my_run.all_data(asics),
+                         it_marathon: my_run.all_data("marathon") }
 end
 
 get '/slider' do
