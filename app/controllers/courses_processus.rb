@@ -86,7 +86,7 @@ class CSVReader
 
         case type
           when "dist"   then mydata[:sum] += item.dist
-          when "t.to_f" then mydata[:sum] += item.temps.min / 60.000 + item.temps.sec / 3600.000
+          when "t.to_f" then mydata[:sum] += item.temps.hour + item.temps.min / 60.000 + item.temps.sec / 3600.000
         end
         mydata[:nb] += 1
       end

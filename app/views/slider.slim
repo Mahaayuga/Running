@@ -8,7 +8,10 @@ div class="frame dragscroll"
     div.slider
       h2 #{Date.strptime(it_dates[i], "%Y-%m-%d").strftime("%-d %b %Y")}
       img src="/img/#{it_dates[i]}.png" alt="image"
-      p #{it_temps[i].strftime("%M'%S")}
+      - if it_temps[i].strftime("%H").to_i == 0
+        p #{it_temps[i].strftime("%M'%S")}
+      - else
+        p #{it_temps[i].strftime("%-Hh%M'%S")}       
       p #{it_dist[i]} km
       p #{it_vitesse[i].strftime("%-M:%S")} /km
 
