@@ -1,6 +1,6 @@
 html{
   background-color:#a193c1;
-  font-family : "Source Sans Pro";
+  font-family : 'Source Sans Pro';
 }
 
 .container {
@@ -8,7 +8,7 @@ html{
   margin: 20px auto;
 }
 
-.container_small {
+.containersmall {
   width: 60%;
   height: 400px;
   margin: 20px auto;
@@ -20,7 +20,7 @@ html{
     margin: 20px 75px;
   } 
   
-  .container_small {
+  .containersmall {
     width: 60%;
     height: 400px;
     margin: 20px auto;
@@ -54,7 +54,7 @@ nav ul li a{
 }
 	
 nav a:hover, nav a:focus{color: #f1eff6;}
-/*.actif{color: white;}*/
+/* .actif{color: white;} */
 
 
 /**************/

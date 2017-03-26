@@ -58,10 +58,15 @@ get '/hebdo' do
   y_hebdo = []
   y2_hebdo = []
 
-  37.upto(52) do |ww|
-    x_hebdo << ww	
-    y_hebdo << my_run.data_hebdo("#{ww}.2016", "dist")
-    y2_hebdo << my_run.data_hebdo("#{ww}.2016", "t.to_f")
+  2016.upto(2017) do |yy|
+    a, b = 37, 52 if yy == 2016
+    a, b = 1, 12   if yy == 2017    
+
+    a.upto(b) do |ww|
+      x_hebdo << ww	
+      y_hebdo << my_run.data_hebdo("#{ww}.#{yy}", "dist")
+      y2_hebdo << my_run.data_hebdo("#{ww}.#{yy}", "t.to_f")
+    end
   end
 
   slim :hebdo, locals: { mes_x: x_hebdo,

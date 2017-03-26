@@ -1,4 +1,5 @@
 require 'csv'
+require 'time'
 require_relative 'courses_processus'
 
 run = CSVReader.new
@@ -18,15 +19,19 @@ run.mise_en_memoire("../../db/data.csv")
 my_x = []
 my_y = []
 
-37.upto(47) do |ww|
+7.upto(8) do |ww|
   my_x << ww
-  my_y << run.data_hebdo("#{ww}.2016")
+  my_y << run.data_hebdo("#{ww}.2017")
 end
 
 print my_y
 print "\n"
 =end
 
-asics = Date.parse('2016-12-10')
+#asics = Date.parse('2016-12-10')
 #puts asics.is_a?(Date)
-puts run.all_data(asics)
+#puts run.all_data(asics)
+
+myTime = Time.strptime(temps, "0:40:33")
+print myTime.strftime("%H")
+print"\n" 
