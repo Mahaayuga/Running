@@ -60,7 +60,7 @@ get '/hebdo' do
 
   2016.upto(2017) do |yy|
     a, b = 37, 52 if yy == 2016
-    a, b = 1, 12   if yy == 2017    
+    a, b = 1, 15   if yy == 2017    
 
     a.upto(b) do |ww|
       x_hebdo << ww	
