@@ -32,6 +32,9 @@ print "\n"
 #puts asics.is_a?(Date)
 #puts run.all_data(asics)
 
-myTime = Time.strptime(temps, "0:40:33")
-print myTime.strftime("%H")
+#myTime = Time.strptime(temps, "0:40:33")
+#print myTime.strftime("%H")
+#print"\n" 
+
+print Date.today.cweek
 print"\n" 

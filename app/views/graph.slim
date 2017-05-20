@@ -12,7 +12,7 @@ javascript:
   var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: myJSArray, 
+    labels: myJSArray,
     datasets: [{
       label: 'Distance',
       data: #{mes_y},
@@ -42,7 +42,7 @@ javascript:
           type: 'time',
           time: {
             unit: 'day',
-            unitStepSize: 3,
+            unitStepSize: 7,
             min: "#{mes_x.last}",
             max: "#{Date.strptime(mes_x.first, "%Y-%m-%d")+1}",
           },
@@ -63,12 +63,12 @@ javascript:
   var tmpValue = myRubyArray.toString().replace(/&quot;/g, '');
   var tmpValue = tmpValue.replace(/[\[\]' /"/ \s]+/g, '');
   var myJSArray = tmpValue.split(",", #{mes_x.count});
-  
+
   var ctx = document.getElementById("myChart_rythm").getContext("2d");
   var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: myJSArray, 
+    labels: myJSArray,
     datasets: [{
       label: 'Rythme',
       data: #{mes_y2},
@@ -90,14 +90,14 @@ javascript:
           type: 'time',
           time: {
             unit: 'day',
-            unitStepSize: 3,
+            unitStepSize: 7,
             min: "#{mes_x.last}",
             max: "#{Date.strptime(mes_x.first, "%Y-%m-%d")+1}",
           }
         }]
       },
       tooltips: {
-        callbacks: { 
+        callbacks: {
           label: function(tooltipItem, data) {
             var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || 'Other';
             var min = Math.floor((Number(tooltipItem.yLabel) * 60) % 60);

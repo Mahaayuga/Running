@@ -10,4 +10,10 @@ J'anime tout ça avec des controlleurs Ruby et l'aide du module [Chartjs.org](ht
 Pour l'instant, un fichier `csv` me sert de base de données
 
 ### Feuille de route ###
-N'ayant pas d'objectifs chiffrés d'un côté ou de l'autre, je vais calculer des moyennes sur des ensemble et des sous-ensembles et bâtir des graphiques pour jauger ma progression
+N'ayant pas d'objectifs chiffrés d'un côté ou de l'autre, je vais calculer des moyennes sur des ensembles et des sous-ensembles et bâtir des graphiques pour jauger ma progression
+
+### Prochaines étapes ###
+- Améliorer la lisibilité du code
+- Afficher unitairement une course selon une date, une donnée chiffrée ou une performance
+- Améliorer les graphiques
+- Gestion du cache

@@ -9,3 +9,6 @@
 
 ### Ignore chart.js and dragscroll.js
 /app/public/js
+
+# Ignore log
+/app/log
