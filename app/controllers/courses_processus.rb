@@ -1,70 +1,76 @@
 require 'csv'
 require 'date'
 require 'time'
-require_relative 'var_courses'
 
-class CSVReader
+class Courses
+
   def initialize
     @course = []
   end
 
   def mise_en_memoire(csv_file_name)
     CSV.foreach(csv_file_name) do |row|
-      @course << Courses.new(row[0], row[1], row[2], row[3])
+      @course << CSVReader.new(row[0], row[1], row[2], row[3])
     end	
   end
 
   # SLIDER
-  def all_inclusive(type)
+  def catalogue(type)
     mydata = []
-    @course.reverse_each do |item|
-      mydata << item.date.to_s if type == "date"
-      mydata << item.temps     if type == "temps"
-      mydata << item.dist      if type == "dist"
-      mydata << item.vitesse   if type == "vitesse"
-      mydata << item.vitesse.min / 60.00 + item.vitesse.sec / 3600.00 if type == "v.to_f"
-      mydata << item.temps.min / 60.000 + item.temps.sec / 3600.000   if type == "t.to_f"
+ 
+   @course.reverse_each do |item|
+      mydata << item.date.to_s  if type == "date"
+      mydata << item.temps      if type == "temps"
+      mydata << item.dist       if type == "dist"
+      mydata << item.vitesse    if type == "vitesse"
+      mydata << to_hour_float(item.vitesse) if type == "v.to_f"
+      mydata << to_hour_float(item.temps)   if type == "t.to_f"
     end
+
     return mydata 
   end  
 
-  def all_case(type)  #même principe que all_inclusive mais avec le case #frime
-    mydata = []
-    @course.reverse_each do |item|
-      
-      case type
-        when "date"    then mydata << item.date.to_s
-        when "temps"   then mydata << item.temps
-        when "t.to_f"  then mydata << item.temps.min / 60.000 + item.temps.sec / 3600.000
-        when "dist"    then mydata << item.dist
-        when "vitesse" then mydata << item.vitesse.strftime("%-M:%S")
-        when "v.to_f"  then mydata << item.vitesse.min / 60.000 + item.vitesse.sec / 3600.000
-      end
-
-    end
-    return mydata
-  end
-
-  def all_data (condition)
+  def all_data (borne)
     mydata = { run: 0, duree: 0, str_duree: "" , dist: 0 }
     
     @course.reverse_each do |item|
-      mydata[:run]  += 1
-      mydata[:duree] += item.temps.min * 60 + item.temps.sec
+      mydata[:run]   += 1
+      mydata[:duree] += to_seconde(item.temps)
       mydata[:dist]  += item.dist
 
-      if condition.is_a?(Date) then
-        break if item.date <= condition
-      else
-        break if mydata[:dist] >= 42.195 && condition == "marathon"
-      end
+      break if borne.is_a?(Date) and item.date <= borne
+      break if mydata[:dist] >= 42.195 && borne == "marathon"
+
     end
 
     tmp = sec_to_hour(mydata[:duree])
-    mydata[:str_duree] = "#{tmp[:hh]} heures #{tmp[:mm]}"
+    mydata[:str_duree] = "#{tmp[:hh]} heures #{tmp[:mm] unless tmp[:mm] == 0}"
 
     return mydata
   end
+
+  def hall_of_fame
+    puts @course.sort_by(&:dist).last
+#    puts @course.sort_by(&:temps.to_s)   # not working
+    
+#   puts @course[17].dist
+#   puts @course[17]
+  end
+
+  def premier
+    return @course.first.date
+  end
+
+
+# --------- Methode Conversion horaire ---------------
+
+  def to_seconde(durée)
+    durée.hour * 3600 + durée.min * 60 + durée.sec
+  end
+
+  def to_hour_float(durée)
+    durée.hour + durée.min / 60.000 + durée.sec / 3600.000
+  end 
 
   def sec_to_hour (secondes)
     #Conversion sec => heures
@@ -74,6 +80,7 @@ class CSVReader
     
     return myhour
   end
+
 
   # WORK IN PROGRESS MOYENNE HEBDO
   def data_hebdo (ww, type)
@@ -86,7 +93,7 @@ class CSVReader
 
         case type
           when "dist"   then mydata[:sum] += item.dist
-          when "t.to_f" then mydata[:sum] += item.temps.hour + item.temps.min / 60.000 + item.temps.sec / 3600.000
+          when "t.to_f" then mydata[:sum] += to_hour_float(item.temps)
         end
         mydata[:nb] += 1
       end
@@ -96,6 +103,34 @@ class CSVReader
 
   end
 end
+
+
+
+class Time_converter
+  # permettrait de regrouper les méthodes de conversion
+end
+
+
+
+# --------- Extraction .CSV  ---------------
+class CSVReader
+
+  attr_reader :date, :temps, :dist, :vitesse
+
+  def initialize (date, temps, dist, vitesse)
+    @date = Date.strptime(date, "%Y%m%d")
+    @temps = Time.strptime(temps, "%H:%M:%S")
+    @dist = dist.to_f
+    @vitesse = Time.strptime(vitesse, "%M:%S")
+  end
+
+  def to_s
+    @temps = @temps.strftime "%l:%M:%S"
+    @vitesse = @vitesse.strftime "%-M:%S /km"
+    "#@date\t#@temps\t#@dist km\t#@vitesse"
+  end
+end
+
 
 class Array
   def cumulative_sum

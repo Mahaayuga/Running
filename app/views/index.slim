@@ -1,10 +1,13 @@
 h1.index Running Portfolio
 
-big Depuis le #{Date.strptime(it_dates.last, "%Y-%m-%d").strftime("%-d %b %Y")} : #{it_data[:run]} courses, #{'%2.1f' % it_data[:dist]} km et #{it_data[:str_duree]} de temps de parcours
+big Depuis le #{ Date.strptime(debut.to_s, "%Y-%m-%d").strftime("%-d %b %Y") } : <strong>#{it_data[:run]}</strong> courses, <strong>#{'%2.1f' % it_data[:dist]}</strong> km sur <strong>#{it_data[:str_duree]}</strong> !
 br/
 br/
-em Utilisation des chaussures : #{'%2.1f' % it_shoes[:dist]} km et #{it_shoes[:str_duree]} de course
+em Utilisation des chaussures actuelles : <strong>#{'%2.1f' % it_shoes[:dist]} km</strong>
 br/
 em Dernier "marathon" : #{it_marathon[:str_duree]} en #{it_marathon[:run]} étapes
 br/
 br/
+
+
+
