@@ -18,8 +18,8 @@ html{
   .container{
     width: 800px;
     margin: 20px 75px;
-  } 
-  
+  }
+
   .containersmall {
     width: 60%;
     height: 400px;
@@ -29,7 +29,7 @@ html{
 
 
 /**************/
-/*  nav   
+/*  nav
 /**************/
 nav{background-color: #725da2; /* #660033;*/}
 
@@ -45,31 +45,39 @@ nav ul{
 nav ul li{display: table-cell;}
 
 nav ul li a{
-  display:block;	
-  text-decoration: none;	
+  display:block;
+  text-decoration: none;
   color: #a193c1;
   text-align: center;
   padding: 2px 20px;
   margin: 0px 15px;
 }
-	
+
 nav a:hover, nav a:focus{color: #f1eff6;}
 /* .actif{color: white;} */
 
 
 /**************/
-/*  /index   
+/*  /index
 /**************/
 
-.index { 
+.index {
   text-align: center;
-  margin-top: 3em;
-  margin-bottom: 1em;
+  margin-top: 2.0em;
+  margin-bottom: 1.5em;
+}
+
+img{
+  display: inline-block;
+  margin: .15em;
+  height:35em;
+  border: solid 1px #c0c6c3;
+  border-radius: 5px ;
 }
 
 
 /**************/
-/*  /slider   
+/*  /slider
 /**************/
 
 .frame {
@@ -79,7 +87,7 @@ nav a:hover, nav a:focus{color: #f1eff6;}
   width:100%;
   white-space:nowrap;
   display:inline-block;
-  padding: 0 0 20px 0;    
+  padding: 0 0 20px 0;
 }
 
 .slider{
@@ -110,7 +118,7 @@ nav a:hover, nav a:focus{color: #f1eff6;}
 }
 
 /**************/
-/*  /graphiques   
+/*  /graphiques
 /**************/
 
 canvas {

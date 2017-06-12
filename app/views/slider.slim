@@ -11,7 +11,6 @@ div class="frame dragscroll"
       - if it_temps[i].strftime("%H").to_i == 0
         p #{it_temps[i].strftime("%M'%S")}
       - else
-        p #{it_temps[i].strftime("%-Hh%M'%S")}       
+        p #{it_temps[i].strftime("%-Hh%M'%S")}
       p #{it_dist[i]} km
       p #{it_vitesse[i].strftime("%-M:%S")} /km
-

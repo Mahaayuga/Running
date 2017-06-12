@@ -11,13 +11,13 @@ class Courses
   def mise_en_memoire(csv_file_name)
     CSV.foreach(csv_file_name) do |row|
       @course << CSVReader.new(row[0], row[1], row[2], row[3])
-    end	
+    end
   end
 
   # SLIDER
   def catalogue(type)
     mydata = []
- 
+
    @course.reverse_each do |item|
       mydata << item.date.to_s  if type == "date"
       mydata << item.temps      if type == "temps"
@@ -27,12 +27,12 @@ class Courses
       mydata << to_hour_float(item.temps)   if type == "t.to_f"
     end
 
-    return mydata 
-  end  
+    return mydata
+  end
 
   def all_data (borne)
     mydata = { run: 0, duree: 0, str_duree: "" , dist: 0 }
-    
+
     @course.reverse_each do |item|
       mydata[:run]   += 1
       mydata[:duree] += to_seconde(item.temps)
@@ -50,11 +50,7 @@ class Courses
   end
 
   def hall_of_fame
-    puts @course.sort_by(&:dist).last
-#    puts @course.sort_by(&:temps.to_s)   # not working
-    
-#   puts @course[17].dist
-#   puts @course[17]
+    return @course.sort_by(&:dist).last
   end
 
   def premier
@@ -70,14 +66,14 @@ class Courses
 
   def to_hour_float(durée)
     durée.hour + durée.min / 60.000 + durée.sec / 3600.000
-  end 
+  end
 
   def sec_to_hour (secondes)
     #Conversion sec => heures
     myhour = { hh: 0, mm: 0, ss:0 }
     myhour[:mm], myhour[:ss] = secondes.divmod(60)
     myhour[:hh], myhour[:mm] = myhour[:mm].divmod(60)
-    
+
     return myhour
   end
 
@@ -99,7 +95,7 @@ class Courses
       end
     end
 
-    return mydata[:nb] != 0 ? mydata[:sum].round(3) : Float::NAN 
+    return mydata[:nb] != 0 ? mydata[:sum].round(3) : Float::NAN
 
   end
 end
