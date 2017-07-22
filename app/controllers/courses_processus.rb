@@ -31,7 +31,7 @@ class Courses
   end
 
   def all_data (borne)
-    mydata = { run: 0, duree: 0, str_duree: "" , dist: 0 }
+    mydata = { run: 0, duree: 0, str_duree: "" , dist: 0, allure: "" }
 
     @course.reverse_each do |item|
       mydata[:run]   += 1
@@ -45,6 +45,7 @@ class Courses
 
     tmp = sec_to_hour(mydata[:duree])
     mydata[:str_duree] = "#{tmp[:hh]} heures #{tmp[:mm] unless tmp[:mm] == 0}"
+    mydata[:allure]    = to_allure( mydata[:dist], mydata[:duree] )
 
     return mydata
   end
@@ -70,13 +71,30 @@ class Courses
 
   def sec_to_hour (secondes)
     #Conversion sec => heures
-    myhour = { hh: 0, mm: 0, ss:0 }
+    myhour = { hh: 0, mm: 0, ss: 0 }
     myhour[:mm], myhour[:ss] = secondes.divmod(60)
     myhour[:hh], myhour[:mm] = myhour[:mm].divmod(60)
 
     return myhour
   end
 
+# --------- Conversion vitesse -----
+  def to_allure (dist, durée)
+    myallure = { mm: 0, ss: 0 }
+    tmp = durée / 60 / dist
+
+    #premier calcul
+    myallure[:mm] = tmp.to_i
+    myallure[:ss] = ( (tmp - myallure[:mm]) *60 ).round
+
+    #check pour éviter un 5min60sec
+    if myallure[:ss] == 60 then
+      myallure[:mm] += 1
+      myallure[:ss]  = 0
+    end
+
+    return myallure
+  end
 
   # WORK IN PROGRESS MOYENNE HEBDO
   def data_hebdo (ww, type)
@@ -96,16 +114,8 @@ class Courses
     end
 
     return mydata[:nb] != 0 ? mydata[:sum].round(3) : Float::NAN
-
   end
 end
-
-
-
-class Time_converter
-  # permettrait de regrouper les méthodes de conversion
-end
-
 
 
 # --------- Extraction .CSV  ---------------

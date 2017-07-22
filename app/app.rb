@@ -37,13 +37,6 @@ get '/slider' do
                           it_vitesse: my_run.catalogue("vitesse") }
 end
 
-get '/graph' do
-
-  slim :graph, locals: { mes_x:  my_run.catalogue("date"),
-                         mes_y:  my_run.catalogue("dist"),
-                         mes_y2: my_run.catalogue("v.to_f") }
-end
-
 get '/courbes' do
 
   slim :lines, locals: { mes_x: my_run.catalogue("date").reverse,
