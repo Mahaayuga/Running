@@ -4,20 +4,20 @@ require_relative 'courses_processus'
 run = Courses.new
 run.mise_en_memoire("../../db/data.csv")
 
-puts run.hall_of_fame
 
+montest = run.all_data("marathon")
+
+puts montest[:allure]
+
+#puts montest[:allure][:mm]
 
 # Test sur methode 'data-hebdo'
 #printf "#{run.data_hebdo(20.2017, 'dist'  )}\n"
 #printf "#{run.data_hebdo(20.2017, 't.to_f')}\n"
 
-
 #print run.to_seconde(Time.now)
 
-
 # mes_data = run.all_inclusive("t.to_f")
-
-
 
 # calcul de moyenne sur une partie d'un tableau
 # five = run[0..4].inject(0, :+) / run[0..4].count
@@ -45,10 +45,20 @@ print "\n"
 #puts run.all_data("marathon")
 
 #myTime = Time.strptime(temps, "0:40:33")
-#print myTime.strftime("%H")
-#print"\n" 
+#myTime = Time.at(46*3600+4*60)
+
+
+#print myTime.strftime("%M")
+#print myTime
+#print"\n"
+#print run.to_hour_float(myTime)
+print"\n"
+#print run.to_min_float(myTime)
+#print run.to_allure(459.3,myTime)
+#print"\n"
+
 
 # calcul du n° de semaine
 # puts Time.now.strftime("%W").to_i # 26/11 => 47
 # print Date.today.cweek
-# print"\n" 
+# print"\n"
