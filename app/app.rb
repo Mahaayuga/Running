@@ -13,7 +13,7 @@ get '/' do
   asics = Date.parse('2016-12-10')
 
   slim :index, locals: { debut:       my_run.premier,
-                         it_data:     my_run.all_data(TRUE),
+                         it_data:     my_run.all_data(Float::NAN),
                          it_shoes:    my_run.all_data(asics),
                          it_marathon: my_run.all_data("marathon"),
                          halloffame:  my_run.hall_of_fame}
@@ -57,13 +57,11 @@ get '/hebdo' do
     a.upto(b) do |ww|
       x_hebdo  << ww
       y_hebdo  << my_run.data_hebdo("#{ww}.#{yy}", "dist"  )
-      y2_hebdo << my_run.data_hebdo("#{ww}.#{yy}", "t.to_f")
     end
   end
 
   slim :hebdo, locals: { mes_x:   x_hebdo,
-                         mes_y:   y_hebdo,
-                         mes_y_2: y2_hebdo }
+                         mes_y:   y_hebdo }
 
 end
 

@@ -1,24 +1,21 @@
 div.containersmall
-  h1 Distance hebdo
+  h1 Distance hebdo sur la dernière année
+
+  p #{@toto}
+
   canvas#myChart_dist
 
 javascript:
-  var myRubyArray = "#{mes_x}";
-  var tmpValue = myRubyArray.toString().replace(/&quot;/g, '');
-  var tmpValue = tmpValue.replace(/[\[\]' /"/ \s]+/g, '');
-  var myJSArray = tmpValue.split(",", #{mes_x.count});
 
   var ctx = document.getElementById("myChart_dist").getContext("2d");
   var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: myJSArray, 
+    labels: #{mes_x.last(53)},
     datasets: [{
       label: 'Distance',
-      data: #{mes_y},
-        backgroundColor: 'rgba(151,187,205, .8)',
-        borderColor: 'rgb(117,164,188)',
-        borderWidth: 2,
+      data: #{mes_y.last(53)},
+        backgroundColor: '#046380',
         pointStrokeColor : '#fff',
       }]
     },
@@ -31,7 +28,7 @@ javascript:
           scaleLabel: {
             display: true,
             labelString: "km parcourus / semaine",
-            fontSize: 16
+            fontSize: 18
           }
         }],
         xAxes: [{
@@ -40,63 +37,6 @@ javascript:
             drawOnChartArea : false
           }
         }]
-      }
-    }
-  });
-
-div.containersmall
-  h1 Durée hebdo
-  canvas#myChart_duree
-
-javascript:
-  var myRubyArray = "#{mes_x}";
-  var tmpValue = myRubyArray.toString().replace(/&quot;/g, '');
-  var tmpValue = tmpValue.replace(/[\[\]' /"/ \s]+/g, '');
-  var myJSArray = tmpValue.split(",", #{mes_x.count});
-
-  var ctx = document.getElementById("myChart_duree").getContext("2d");
-  var myChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: myJSArray, 
-    datasets: [{
-      label: 'Durée',
-      data: #{mes_y_2},
-        backgroundColor: 'rgba(151,187,205, .8)',
-        borderColor: 'rgb(117,164,188)',
-        borderWidth: 2,
-        pointStrokeColor : '#fff',
-      }]
-    },
-    options: {
-      legend: {display: false},
-      hover: {mode: 'single'},
-      scales: {
-        yAxes: [{
-          ticks: {beginAtZero: true},
-          scaleLabel: {
-            display: true,
-            labelString: "temps / semaine",
-            fontSize: 16
-          }
-        }],
-        xAxes: [{
-          gridLines: {
-            display: false,
-            drawOnChartArea : false
-          }
-        }]
-      },
-      tooltips: {
-        callbacks: { 
-          label: function(tooltipItem, data) {
-            var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || 'Other';
-            var heure = Math.floor(Number(tooltipItem.yLabel))
-            var min = Math.floor((Number(tooltipItem.yLabel) * 60) % 60);
-            var sec = Math.floor((Number(tooltipItem.yLabel) * 3600) % 3600) - min * 60 ;
-            return datasetLabel + ': ' + heure + ":" + (min < 10 ? "0" : "") + min;
-          }
-        }
       }
     }
   });

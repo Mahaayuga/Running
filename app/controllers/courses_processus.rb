@@ -115,6 +115,22 @@ class Courses
 
     return mydata[:nb] != 0 ? mydata[:sum].round(3) : Float::NAN
   end
+
+  def rythme_mensuel (mois)
+    mydata = { dist: 0, duree_sec: 0, allure: '' }
+
+    mois, aa = mois.to_s.split(".")
+
+    @course.each do |item|
+      if mois.to_i == item.date.strftime("%-m").to_i && item.date.year == aa.to_i then
+        mydata[:dist]      += item.dist
+        mydata[:duree_sec] += to_seconde(item.temps)
+      end
+    end
+
+    return to_allure(mydata[:dist], mydata[:duree_sec] )
+
+  end
 end
 
 
