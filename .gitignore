@@ -12,3 +12,6 @@
 
 # Ignore log
 /app/log
+
+# Ignore Trash
+.trash

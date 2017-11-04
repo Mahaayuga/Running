@@ -5,9 +5,7 @@ run = Courses.new
 run.mise_en_memoire("../../db/data.csv")
 
 
-montest = run.all_data("marathon")
-
-puts montest[:allure]
+puts run.rythme_mensuel ("8.2017")
 
 #puts montest[:allure][:mm]
 
