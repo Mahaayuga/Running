@@ -1,8 +1,6 @@
 div.containersmall
   h1 Distance hebdo sur la dernière année
 
-  p #{@toto}
-
   canvas#myChart_dist
 
 javascript:
@@ -19,24 +17,5 @@ javascript:
         pointStrokeColor : '#fff',
       }]
     },
-    options: {
-      legend: {display: false},
-      hover: {mode: 'single'},
-      scales: {
-        yAxes: [{
-          ticks: {beginAtZero: true},
-          scaleLabel: {
-            display: true,
-            labelString: "km parcourus / semaine",
-            fontSize: 18
-          }
-        }],
-        xAxes: [{
-          gridLines: {
-            display: false,
-            drawOnChartArea : false
-          }
-        }]
-      }
-    }
+    options: { #{{ my_chart_css }} }
   });

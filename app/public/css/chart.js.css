@@ -1,0 +1,19 @@
+
+      legend: {display: false},
+      hover: {mode: 'single'},
+      scales: {
+        yAxes: [{
+          ticks: {beginAtZero: true},
+          scaleLabel: {
+            display: true,
+            labelString: "km parcourus / semaine",
+            fontSize: 18
+          }
+        }],
+        xAxes: [{
+          gridLines: {
+            display: false,
+            drawOnChartArea : false
+          }
+        }]
+      }

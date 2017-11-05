@@ -6,6 +6,8 @@ require_relative 'controllers/courses_processus.rb'
 my_run = Courses.new
 my_run.mise_en_memoire("../db/data.csv")
 
+#style du graphique
+chart_css = IO.read("./public/css/chart.js.css")
 
 get '/' do
 
@@ -17,15 +19,6 @@ get '/' do
                          it_shoes:    my_run.all_data(asics),
                          it_marathon: my_run.all_data("marathon"),
                          halloffame:  my_run.hall_of_fame}
-
-end
-
-get '/slider/:qt' do
-
-  slim :slider, locals: { it_dates:   my_run.catalogue("date"),
-                          it_temps:   my_run.catalogue("temps"),
-                          it_dist:    my_run.catalogue("dist"),
-                          it_vitesse: my_run.catalogue("vitesse") }
 
 end
 
@@ -60,8 +53,9 @@ get '/hebdo' do
     end
   end
 
-  slim :hebdo, locals: { mes_x:   x_hebdo,
-                         mes_y:   y_hebdo }
+  slim :hebdo, locals: {        mes_x: x_hebdo,
+                                mes_y: y_hebdo,
+                         my_chart_css: chart_css   }
 
 end
 
