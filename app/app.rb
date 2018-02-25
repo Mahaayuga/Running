@@ -4,7 +4,7 @@ require_relative 'controllers/courses_processus.rb'
 
 #int variable
 my_run = Courses.new
-my_run.mise_en_memoire("../db/data.csv")
+my_run.mise_en_memoire("../db/data-reworked.csv")
 
 #style du graphique
 chart_css = IO.read("./public/css/chart.js.css")
@@ -43,9 +43,10 @@ get '/hebdo' do
   y_hebdo = []
   y2_hebdo = []
 
-  2016.upto(2017) do |yy|
+  2016.upto(2018) do |yy|
     a, b = 37, 52                if yy == 2016
-    a, b =  1, Date.today.cweek  if yy == 2017
+    a, b =  1, 52                if yy == 2017
+    a, b =  1, Date.today.cweek  if yy == 2018
 
     a.upto(b) do |ww|
       x_hebdo  << ww
