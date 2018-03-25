@@ -1,7 +1,9 @@
 div.containersmall
   h1 Distance hebdo sur la dernière année
-
   canvas#myChart_dist
+
+  h1 Rythme hebdo sur la dernière année
+  canvas#myChart_rythme
 
 javascript:
 
@@ -9,7 +11,7 @@ javascript:
   var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: #{mes_x.last(53)},
+    labels: #{{ mes_x.last(53) }},
     datasets: [{
       label: 'Distance',
       data: #{mes_y.last(53)},
@@ -18,4 +20,41 @@ javascript:
       }]
     },
     options: { #{{ my_chart_css }} }
+  });
+
+
+
+javascript:
+
+  var ctx = document.getElementById("myChart_rythme").getContext("2d");
+  var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: #{{ mes_x.last(53) }},
+    datasets: [{
+      label: 'Rythme',
+      data: #{ mes_y2.last(53) },
+        backgroundColor: '#046380',
+        pointStrokeColor : '#fff',
+      }]
+    },
+    options: {
+      legend: {display: false},
+      hover: {mode: 'single'},
+      scales: {
+        yAxes: [{
+          ticks: {min:8, max: 11},
+          scaleLabel: {
+            display: true,
+              labelString: "rythme / semaine",
+              fontSize: 18
+            }
+          }],
+          xAxes: [{
+            gridLines: {
+              display: false,
+              drawOnChartArea : false
+            }
+          }]
+      }}
   });

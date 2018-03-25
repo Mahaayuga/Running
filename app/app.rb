@@ -1,3 +1,4 @@
+require 'date'
 require 'sinatra'
 require 'slim'
 require_relative 'controllers/courses_processus.rb'
@@ -5,6 +6,7 @@ require_relative 'controllers/courses_processus.rb'
 #int variable
 my_run = Courses.new
 my_run.mise_en_memoire("../db/data-reworked.csv")
+#my_run.mise_en_memoire("../db/data.csv")
 
 #style du graphique
 chart_css = IO.read("./public/css/chart.js.css")
@@ -17,6 +19,7 @@ get '/' do
   slim :index, locals: { debut:       my_run.premier,
                          it_data:     my_run.all_data(Float::NAN),
                          it_shoes:    my_run.all_data(asics),
+                         it_year:     my_run.all_data(Date.today.prev_year),
                          it_marathon: my_run.all_data("marathon"),
                          halloffame:  my_run.hall_of_fame}
 
@@ -39,23 +42,30 @@ end
 get '/hebdo' do
 
   #calcul hebdo
-  x_hebdo = []
-  y_hebdo = []
-  y2_hebdo = []
+  x_hebdo, y_hebdo, y2hebdo = [], [], []
+#  y_hebdo = []
+#  y2hebdo = []
 
-  2016.upto(2018) do |yy|
-    a, b = 37, 52                if yy == 2016
-    a, b =  1, 52                if yy == 2017
-    a, b =  1, Date.today.cweek  if yy == 2018
+  début = Date.new(2016,9,15)
+  today = Date.today
+  arr = []
 
-    a.upto(b) do |ww|
+  (début..today).to_a.each do |n|
+    arr << n.year.to_s.concat("." + n.cweek.to_s) unless arr.last ==  n.year.to_s.concat("." + n.cweek.to_s) or arr.last.to_s[-2,2] == n.cweek.to_s
+  end
+
+  arr.each do |x|
+      yy, ww = x.split(".")
       x_hebdo  << ww
-      y_hebdo  << my_run.data_hebdo("#{ww}.#{yy}", "dist"  )
-    end
+#     y_hebdo  << my_run.data_hebdo(ww, yy, "dist")
+#     y2hebdo  << my_run.data_hebdo(ww, yy, "t.to_f")
+      y_hebdo  << my_run.data_hebdo_test(ww, yy, "dist")
+      y2hebdo  << my_run.data_hebdo_test(ww, yy, "rythm")
   end
 
   slim :hebdo, locals: {        mes_x: x_hebdo,
                                 mes_y: y_hebdo,
+                               mes_y2: y2hebdo,
                          my_chart_css: chart_css   }
 
 end

@@ -1,15 +1,17 @@
 h1.index Running Portfolio
 
-big Depuis le #{ Date.strptime(debut.to_s, "%Y-%m-%d").strftime("%-d %b %Y") } : <strong>#{it_data[:run]}</strong> courses, <strong>#{'%2.1f' % it_data[:dist]}</strong> km sur <strong>#{it_data[:str_duree]}</strong> !
-br/
-big soit un rythme de #{it_data[:allure][:mm]}:#{'%02d' % it_data[:allure][:ss]} min/km
-br/
-br/
-em Utilisation des chaussures actuelles : <strong>#{'%2.1f' % it_shoes[:dist]} km</strong>
-br/
-em Dernier "marathon" : #{it_marathon[:str_duree]} en #{it_marathon[:run]} étapes
-br/
-br/
-big Plus longue course : #{ halloffame.date.strftime("%-d %B %Y") }, <strong>#{halloffame.dist} km</strong> en #{halloffame.temps.strftime("%-H heure %-M minutes")}
-br/
-img src="/img/#{halloffame.date}.png" alt="Plus long parcours"
+p Depuis le #{ Date.strptime(debut.to_s, "%Y-%m-%d").strftime("%-d %b %Y") } :
+  <strong>#{it_data[:run]}</strong>
+  courses, <strong>#{'%2.1f' % it_data[:dist]}</strong> km
+  sur <strong>#{it_data[:str_duree]}</strong> !
+  soit un rythme moyen de <big> #{it_data[:allure][:mm]}:#{'%02d' % it_data[:allure][:ss]} min/km </big>
+  <br/>Depuis un an :
+    <strong>#{it_year[:run]}</strong>
+    courses, <strong>#{'%2.1f' % it_year[:dist]}</strong> km
+    sur <strong>#{it_year[:str_duree]}</strong> !
+    soit un rythme moyen de <big> #{it_year[:allure][:mm]}:#{'%02d' % it_year[:allure][:ss]} min/km </big>
+
+p <em> Utilisation des chaussures actuelles : <strong>#{'%2.1f' % it_shoes[:dist]} km</strong>
+  <br/> Dernier "marathon" : #{it_marathon[:str_duree]} en #{it_marathon[:run]} étapes
+p Plus longue course : #{ halloffame.date.strftime("%-d %B %Y") }, <strong>#{halloffame.dist} km</strong> en #{halloffame.temps.strftime("%-H heure %-M minutes")}
+  <br/> <img src="/img/#{halloffame.date}.png" alt="Plus long parcours" />

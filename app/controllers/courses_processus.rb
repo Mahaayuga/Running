@@ -97,10 +97,8 @@ class Courses
   end
 
   # WORK IN PROGRESS MOYENNE HEBDO
-  def data_hebdo (ww, type)
+  def data_hebdo (ww, aa, type)
     mydata = { sum: 0, nb: 0 }
-
-    ww, aa = ww.to_s.split(".")
 
     @course.each do |item|
       if ww.to_i == item.date.strftime("%W").to_i && item.date.year == aa.to_i then
@@ -115,7 +113,26 @@ class Courses
 
     return mydata[:nb] != 0 ? mydata[:sum].round(3) : Float::NAN
   end
+  # --------------------------------------------------------------------------
+  # --------------------------------------------------------------------------
+  def data_hebdo_test (ww, aa, type)
+    mydata = { dist: 0, tps:0, nb: 0 }
 
+    @course.each do |item|
+      if ww.to_i == item.date.strftime("%W").to_i && item.date.year == aa.to_i then
+        mydata[:dist] += item.dist
+        mydata[:tps] += to_hour_float(item.temps)
+        mydata[:nb] += 1
+      end
+    end
+
+    case type
+      when "dist"  then return mydata[:nb] != 0 ? mydata[:dist].round(3) : Float::NAN
+      when "rythm" then return mydata[:nb] != 0 ? (mydata[:dist] / mydata[:tps]).round(1) : Float::NAN
+    end
+  end
+# --------------------------------------------------------------------------
+# --------------------------------------------------------------------------
   def rythme_mensuel (mois)
     mydata = { dist: 0, duree_sec: 0, allure: '' }
 
