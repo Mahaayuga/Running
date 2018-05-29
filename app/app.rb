@@ -14,7 +14,8 @@ chart_css = IO.read("./public/css/chart.js.css")
 get '/' do
 
   #nouvelles chaussures
-  asics = Date.parse('2016-12-10')
+  #asics = Date.parse('2016-12-10')
+  asics = Date.parse('2018-05-11')
 
   slim :index, locals: { debut:       my_run.premier,
                          it_data:     my_run.all_data(Float::NAN),
@@ -43,8 +44,6 @@ get '/hebdo' do
 
   #calcul hebdo
   x_hebdo, y_hebdo, y2hebdo = [], [], []
-#  y_hebdo = []
-#  y2hebdo = []
 
   début = Date.new(2016,9,15)
   today = Date.today
